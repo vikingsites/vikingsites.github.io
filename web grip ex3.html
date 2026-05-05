@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ÆON | photonic intelligence</title>
+  <!-- fonts: inter + space grotesk for premium feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- font awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- RESET / GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0a0c0f;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(0, 230, 201, 0.03) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(30, 167, 253, 0.04) 0%, transparent 35%),
+        radial-gradient(circle at 40% 80%, rgba(200, 255, 240, 0.02) 0%, transparent 40%);
+      font-family: 'Inter', sans-serif;
+      color: #eaeef2;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 0 1.5rem;
+      position: relative;
+    }
+
+    /* premium animated grain overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4wMjUiIC8+PC9zdmc+');
+      pointer-events: none;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .wrapper {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 7rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* ---------- TYPOGRAPHY (premium clean) ---------- */
+    h1, h2, h3, h4, .logo, .nav-links a, .badge, .chip, .btn {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: white;
+      text-shadow: 0 0 15px rgba(0, 230, 201, 0.2);
+    }
+
+    h2 i {
+      color: #00e6c9;
+      font-size: 2.4rem;
+      margin-right: 0.5rem;
+      filter: drop-shadow(0 0 10px #00e6c9);
+    }
+
+    p {
+      font-weight: 300;
+      color: #b0b8c5;
+      font-size: 1.1rem;
+    }
+
+    /* ---------- GLASS / CARD EFFECTS (elevated) ---------- */
+    .glass-card {
+      background: rgba(18, 22, 28, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(64, 224, 208, 0.1);
+      border-bottom: 1px solid rgba(0, 230, 201, 0.25);
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -15px rgba(0, 0, 0, 0.8), 0 0 0 0.5px rgba(0, 255, 200, 0.1), 0 0 30px -10px rgba(0, 230, 201, 0.2);
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 230, 201, 0.4);
+      box-shadow: 0 30px 55px -18px rgba(0, 230, 201, 0.25), 0 0 0 1px rgba(0, 255, 200, 0.2), 0 0 40px -5px #00e6c9;
+      background: rgba(22, 28, 35, 0.75);
+      transform: translateY(-2px);
+    }
+
+    /* ---------- HEADER / NAV (linked sections) ---------- */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.04em;
+    }
+
+    .logo i {
+      color: #00e6c9;
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 10px rgba(0, 230, 201, 0.6));
+      animation: softPulse 3s infinite;
+    }
+
+    @keyframes softPulse {
+      0% { filter: drop-shadow(0 0 5px rgba(0, 230, 201, 0.4)); }
+      50% { filter: drop-shadow(0 0 15px rgba(0, 230, 201, 0.8)); }
+      100% { filter: drop-shadow(0 0 5px rgba(0, 230, 201, 0.4)); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #cdd9e6;
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      text-shadow: 0 0 8px #00e6c9;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #00e6c9, #a0f0ea, #00e6c9);
+      background-size: 200% auto;
+      transition: width 0.3s;
+      box-shadow: 0 0 10px #00e6c9;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-right {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .chip {
+      background: rgba(0, 230, 201, 0.08);
+      border: 1px solid rgba(0, 230, 201, 0.3);
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #d4f4f0;
+      font-weight: 600;
+      cursor: default;
+    }
+
+    /* ---------- HERO SECTION (more depth) ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      padding: 2rem 0 3rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .badge {
+      background: rgba(0, 230, 201, 0.12);
+      border: 1px solid rgba(0, 230, 201, 0.5);
+      border-radius: 60px;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #e6fffa;
+      align-self: flex-start;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(0, 230, 201, 0.2);
+    }
+
+    .hero-title {
+      font-size: 4.2rem;
+      font-weight: 700;
+      line-height: 1.05;
+      color: white;
+    }
+
+    .hero-title span {
+      background: linear-gradient(to right, #ffffff, #b0f0ed, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .hero-desc {
+      font-size: 1.25rem;
+      max-width: 80%;
+      color: #cbd5e1;
+      font-weight: 300;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .btn {
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: #00e6c9;
+      color: #0a0c0f;
+      box-shadow: 0 10px 25px -5px rgba(0, 230, 201, 0.5);
+    }
+
+    .btn-primary:hover {
+      background: #b3fff0;
+      box-shadow: 0 15px 35px -5px #00e6c9;
+      border-color: #00e6c9;
+      color: #0a0c0f;
+      transform: scale(1.02) translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(0, 230, 201, 0.6);
+      color: #e0f2fe;
+    }
+
+    .btn-outline:hover {
+      border-color: #00e6c9;
+      background: rgba(0, 230, 201, 0.1);
+      color: white;
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 10px 20px -10px #00e6c9;
+    }
+
+    .hero-right {
+      background: radial-gradient(circle at 30% 50%, rgba(0,230,201,0.15), transparent 70%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .glass-card.hero-card {
+      padding: 2.5rem 2rem;
+      width: 100%;
+      border-radius: 2.5rem;
+      background: rgba(15, 20, 26, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(0, 230, 201, 0.25);
+      box-shadow: 0 30px 60px -20px black, 0 0 30px -10px #00e6c9;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .metric-value {
+      font-size: 2.6rem;
+      font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif;
+      color: white;
+      line-height: 1;
+      text-shadow: 0 0 10px rgba(0, 230, 201, 0.4);
+    }
+
+    .metric-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #9aaeb9;
+    }
+
+    .chip-small {
+      background: rgba(255,255,255,0.02);
+      border: 0.5px solid rgba(0,230,201,0.4);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+    }
+
+    hr {
+      border: 0;
+      height: 0.5px;
+      background: linear-gradient(90deg, transparent, rgba(0,230,201,0.5), transparent);
+      margin: 1.5rem 0;
+    }
+
+    /* ---------- SERVICES SECTION ---------- */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-link {
+      color: #00e6c9;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0,230,201,0.3);
+      padding-bottom: 0.2rem;
+      transition: all 0.2s;
+    }
+    .section-link:hover {
+      border-bottom-color: #00e6c9;
+      text-shadow: 0 0 8px #00e6c9;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+
+    .service-card {
+      padding: 2.5rem 1.8rem;
+      border-radius: 2rem;
+      background: rgba(12, 18, 24, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(64, 224, 208, 0.1);
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .service-card:hover {
+      background: rgba(18, 28, 36, 0.8);
+      border-color: rgba(0, 230, 201, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 40px -15px rgba(0, 230, 201, 0.2);
+    }
+
+    .service-icon {
+      font-size: 2.4rem;
+      color: #00e6c9;
+      filter: drop-shadow(0 0 8px #00e6c9);
+    }
+
+    .service-title {
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.03em;
+    }
+
+    .service-desc {
+      font-size: 0.95rem;
+      color: #a6b7c3;
+      line-height: 1.6;
+    }
+
+    /* ---------- FEATURE SHOWCASE ---------- */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.8rem;
+    }
+
+    .feature-main {
+      padding: 3rem 2.5rem;
+      background: rgba(8, 18, 22, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 230, 201, 0.2);
+      border-radius: 2.5rem;
+    }
+
+    .feature-main h3 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      color: #cbd5e1;
+    }
+
+    .feature-list i {
+      color: #00e6c9;
+      font-size: 1.2rem;
+      filter: drop-shadow(0 0 5px #00e6c9);
+    }
+
+    .feature-side {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(10, 18, 26, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,230,201,0.15);
+      border-radius: 2rem;
+    }
+
+    /* ---------- CLIENTS / SOCIAL PROOF ---------- */
+    .clients {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      border-top: 0.5px solid rgba(0,230,201,0.2);
+      border-bottom: 0.5px solid rgba(0,230,201,0.2);
+    }
+
+    .client-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: -0.02em;
+      transition: all 0.2s;
+    }
+
+    .client-logo:hover {
+      color: #00e6c9;
+      text-shadow: 0 0 10px #00e6c9;
+      transform: scale(1.02);
+    }
+
+    /* ---------- APPLY SECTION (interactive invite) ---------- */
+    .invite-container {
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 0;
+    }
+
+    .invite-card {
+      display: inline-flex;
+      padding: 1.2rem 2.8rem;
+      align-items: center;
+      gap: 3rem;
+      border-radius: 100px;
+      background: rgba(8, 18, 24, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0,230,201,0.2);
+      box-shadow: 0 20px 40px -15px black;
+    }
+
+    .invite-button {
+      padding: 0.8rem 2rem;
+      background: #00e6c9;
+      color: #0a0c0f;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 5px 15px -5px #00e6c9;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .invite-button:hover {
+      background: #b3fff0;
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 0 10px 25px -5px #00e6c9;
+    }
+
+    .invite-button.invited {
+      background: rgba(0, 230, 201, 0.15);
+      color: #00e6c9;
+      border: 1px solid #00e6c9;
+      box-shadow: 0 0 15px #00e6c9;
+      cursor: default;
+      pointer-events: none;
+      text-shadow: 0 0 5px #00e6c9;
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0 3rem;
+      color: #7e8c98;
+      font-weight: 300;
+      border-top: 0.5px solid rgba(0,230,201,0.15);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: #b0c4ce;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover {
+      color: #00e6c9;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1100px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-desc { max-width: 100%; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .wrapper { gap: 4rem; }
+      h2 { font-size: 2.2rem; }
+    }
+
+    ::selection {
+      background: rgba(0, 230, 201, 0.3);
+      color: white;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f1215;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2c3e3c;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00e6c9;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER with linked sections (top bar buttons) -->
+    <header>
+      <div class="logo">
+        <i class="fas fa-microchip"></i> ÆON
+      </div>
+      <div class="nav-links">
+        <a href="#core-systems">Systems</a>      <!-- linked to Core Systems -->
+        <a href="#blueprint">Quantum</a>          <!-- linked to Blueprint/Feature -->
+        <a href="#edge-section">Edge</a>          <!-- linked to Edge (clients section) -->
+        <a href="#apply-section">Lab</a>          <!-- linked to Apply section -->
+      </div>
+      <div class="nav-right">
+        <span class="chip"><i class="fas fa-lock" style="margin-right: 6px;"></i> ÆON OS</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-left">
+        <span class="badge"><i class="fas fa-crown" style="margin-right: 6px;"></i> exclusive launch</span>
+        <h1 class="hero-title">
+          <span>compute</span><br>beyond silicon.
+        </h1>
+        <p class="hero-desc">
+          ÆON photonic processors deliver 10⁶ x inference speed. zero resistance, infinite scalability.
+        </p>
+        <div class="btn-group">
+          <a href="#core-systems" class="btn btn-primary"><i class="fas fa-arrow-right"></i> reserve node</a>
+          <a href="#blueprint" class="btn btn-outline"><i class="fas fa-wave-square"></i> blueprint</a>
+        </div>
+        <div style="display: flex; gap: 1.2rem; margin-top: 1.2rem;">
+          <span style="display: flex; align-items: center; gap: 0.3rem;"><i class="fas fa-check-circle" style="color: #00e6c9; font-size: 0.9rem; filter: drop-shadow(0 0 5px #00e6c9);"></i> <span style="font-size: 0.85rem;">NIST‑certified</span></span>
+          <span style="display: flex; align-items: center; gap: 0.3rem;"><i class="fas fa-shield-hal" style="color: #00e6c9; font-size: 0.9rem; filter: drop-shadow(0 0 5px #00e6c9);"></i> <span style="font-size: 0.85rem;">post‑quantum</span></span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="glass-card hero-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <span style="font-weight: 600; color: white; font-size: 1.2rem;"><i class="fas fa-bolt" style="color: #00e6c9; margin-right: 6px; filter: drop-shadow(0 0 8px #00e6c9);"></i> photonic fabric</span>
+            <span class="chip-small">live α</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-item">
+              <span class="metric-value">1.4<span style="font-size: 1.4rem;">e</span>15</span>
+              <span class="metric-label">ops / joule</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">5<span style="font-size: 1.6rem;">ns</span></span>
+              <span class="metric-label">latency</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">∞</span>
+              <span class="metric-label">quantum‑safe</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">0.3<span style="font-size: 1.2rem;">k</span></span>
+              <span class="metric-label">thermal load</span>
+            </div>
+          </div>
+          <hr>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="color: #aaccdd; font-size: 0.8rem;">next‑gen tesseract</span>
+            <span style="color: #00e6c9;"><i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTS (id="edge-section" for nav) -->
+    <div id="edge-section" class="clients" style="scroll-margin-top: 80px;">
+      <span class="client-logo">QUANTUM·ARC</span>
+      <span class="client-logo">NEURALIS</span>
+      <span class="client-logo">TERADYNE</span>
+      <span class="client-logo">PHOTONIC</span>
+      <span class="client-logo">CORTEX</span>
+    </div>
+
+    <!-- CORE SYSTEMS (id="core-systems") -->
+    <div id="core-systems" style="scroll-margin-top: 80px;">
+      <div class="section-header">
+        <h2><i class="fas fa-circle-nodes"></i> core systems</h2>
+        <a href="#" class="section-link">all interfaces →</a>
+      </div>
+      <div class="services-grid">
+        <div class="service-card glass-card">
+          <i class="fas fa-atom service-icon"></i>
+          <div class="service-title">Photon OS</div>
+          <div class="service-desc">Bare‑metal photonic scheduler. zero‑copy tensor routing.</div>
+        </div>
+        <div class="service-card glass-card">
+          <i class="fas fa-cube service-icon"></i>
+          <div class="service-title">Tesseract</div>
+          <div class="service-desc">3D‑stacked optical memory, 20TB/s bandwidth.</div>
+        </div>
+        <div class="service-card glass-card">
+          <i class="fas fa-shield service-icon"></i>
+          <div class="service-title">Q‑shield</div>
+          <div class="service-desc">Lattice‑based crypto, embedded PQC.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLUEPRINT (id="blueprint") -->
+    <div id="blueprint" class="feature-grid" style="scroll-margin-top: 80px;">
+      <div class="feature-main glass-card">
+        <span style="color: #00e6c9; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem;">integrated photonics</span>
+        <h3 style="margin-top: 0.8rem;">coherent <span style="color: #00e6c9;">light</span> fabric</h3>
+        <p style="margin-bottom: 1.2rem;">Silicon photonic interposer with 1024 channels, each 100Gbps. coherent modulation eliminates electrical bottlenecks.</p>
+        <ul class="feature-list">
+          <li><i class="fas fa-check"></i> 5.12 Tbps cross‑bar</li>
+          <li><i class="fas fa-check"></i> < 1pJ/bit switching</li>
+          <li><i class="fas fa-check"></i> DWDM on‑die</li>
+        </ul>
+      </div>
+      <div class="feature-side glass-card">
+        <div>
+          <span style="font-size: 2.5rem; font-weight: 700; color: white;">94%</span>
+          <span style="display: block; color: #bed9d4; margin-top: 0.3rem;">energy reduction vs. CMOS</span>
+        </div>
+        <div style="margin-top: 2rem;">
+          <span style="font-size: 2.5rem; font-weight: 700; color: white;">8.2M</span>
+          <span style="display: block; color: #bed9d4;">cores / rack</span>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <span style="background: rgba(0,230,201,0.1); padding: 0.5rem 1.2rem; border-radius: 100px; border: 0.5px solid rgba(0,230,201,0.3); font-size: 0.8rem;">
+            <i class="fas fa-microchip"></i> tapeout 2026
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVITE SECTION (interactive invite button) -->
+    <div id="apply-section" style="scroll-margin-top: 80px;" class="invite-container">
+      <div class="glass-card invite-card">
+        <span style="display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-infinity" style="color: #00e6c9; font-size: 1.8rem; filter: drop-shadow(0 0 10px #00e6c9);"></i>
+          <span style="font-weight: 400; color: white; font-size: 1.2rem;">unlimited photonic fabric — early access</span>
+        </span>
+        <!-- Interactive Invite Button -->
+        <button id="inviteBtn" class="invite-button" onclick="handleInvite()">✉️ request invite</button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <span style="font-weight: 400; letter-spacing: 0.05rem;">ÆON 2026 — photonic intelligence</span>
+      <div class="footer-links">
+        <a href="#">privacy</a>
+        <a href="#">licensing</a>
+        <a href="#">careers</a>
+        <a href="#"><i class="fab fa-github" style="margin-right: 5px;"></i> research</a>
+      </div>
+    </footer>
+
+  </div> <!-- end wrapper -->
+
+  <!-- subtle glow effect -->
+  <div style="position: fixed; bottom: 0; left: 0; width: 100%; height: 300px; background: radial-gradient(ellipse at 50% 100%, rgba(0,230,201,0.03), transparent 70%); pointer-events: none; z-index: 0;"></div>
+
+  <!-- smooth scroll -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+
+  <!-- JavaScript for interactive invite button -->
+  <script>
+    function handleInvite() {
+      const btn = document.getElementById('inviteBtn');
+      // change button to "invited" style and show alert
+      if (!btn.classList.contains('invited')) {
+        btn.classList.add('invited');
+        btn.textContent = '✓ invited';
+        alert('✨ You have been invited to the ÆON photonic fabric early access program. Check your quantum mail.');
+      } else {
+        // just in case, but button becomes disabled anyway
+        alert('You are already invited.');
+      }
+    }
+  </script>
+</body>
+</html>

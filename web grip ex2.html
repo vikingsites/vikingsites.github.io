@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERDIAN · linked & premium</title>
+    <!-- VERDIAN : FUCKING PREMIUM + ANCHOR SECTIONS — as requested -->
+    <style>
+        /* ---------- VERDIAN ABSOLUTE ----------
+           black emerald / wet chlorophyll / 24k patina
+           no fake green — only verdian matter
+        --------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+            scroll-behavior: smooth;
+            background: #0a0f07;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+                         'Helvetica Neue', sans-serif;
+            background: radial-gradient(circle at 80% 10%, #162012, #030503);
+            color: #ebf5e2;
+            font-weight: 300;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        /* wet noise – ultra premium finish */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><filter id="g"><feTurbulence baseFrequency="0.65" numOctaves="1"/><feColorMatrix values="0.1 0 0 0 0 0 0.15 0 0 0 0 0 0.08 0 0 0 0 0 0.25 0"/></filter><rect width="100%%" height="100%%" filter="url(%23g)" opacity="0.1"/></svg>');
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 999;
+            mix-blend-mode: multiply;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2.2rem 3rem;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* ---------- section anchors – invisible but perfect ---------- */
+        .section-anchor {
+            display: block;
+            position: relative;
+            top: -30px;
+            visibility: hidden;
+        }
+
+        /* typography – wet jade */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: 5.2rem;
+            font-weight: 650;
+            line-height: 1;
+            text-transform: uppercase;
+            background: linear-gradient(145deg, #f3ffe6, #ceffad);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px #94ff6e, 0 2px 0 #1f321a;
+        }
+
+        h2 {
+            font-size: 2.9rem;
+            font-weight: 470;
+            color: #eeffe3;
+            margin-bottom: 0.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* signature verdian underline – liquid gold */
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 45%;
+            height: 3px;
+            background: linear-gradient(90deg, #c6ff9b, #699451, #273f20);
+            border-radius: 6px;
+            box-shadow: 0 0 20px #aaff8070;
+        }
+
+        /* navigation – anchored, sharp, sexy */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0 1.6rem 0;
+            border-bottom: 1px solid rgba(130, 200, 80, 0.25);
+            backdrop-filter: blur(10px);
+            margin-bottom: 2rem;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(145deg, #f8ffd2, #bcff8c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 7px;
+            text-shadow: 0 0 24px #a1ff78;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.4rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #daf5c0;
+            font-size: 1.05rem;
+            font-weight: 430;
+            letter-spacing: 3px;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid transparent;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            border-bottom-color: #b5ff78;
+            text-shadow: 0 0 15px #bbff88;
+        }
+
+        /* premium btn – forged */
+        .btn {
+            display: inline-block;
+            padding: 1.1rem 2.8rem;
+            background: rgba(18, 32, 12, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(180, 240, 110, 0.4);
+            border-bottom: 2px solid #acd88a;
+            color: #f4ffee;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border-radius: 40px;
+            transition: 0.3s;
+            box-shadow: 0 15px 30px -12px black;
+        }
+
+        .btn:hover {
+            background: #294223;
+            border-color: #deffb0;
+            box-shadow: 0 25px 40px -12px #000, 0 0 32px #b0ff80b0;
+            transform: translateY(-3px);
+        }
+
+        /* hero grid */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 2.8rem 0 4rem;
+        }
+
+        .hero p {
+            font-size: 1.45rem;
+            color: #e1f0d3;
+            border-left: 5px solid #94c270;
+            padding-left: 2rem;
+            margin: 2rem 0 2.6rem;
+            font-weight: 320;
+        }
+
+        .emblem {
+            background: radial-gradient(circle at 30% 40%, #304526, #0e170a);
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 60px -15px black, 
+                        inset 0 -15px 30px #000000b0,
+                        0 0 0 2px #5a874a;
+        }
+
+        .emblem::after {
+            content: "⯎";
+            font-size: 11rem;
+            color: #beff8a;
+            text-shadow: 0 0 70px #96ff70, 0 0 130px #538541, 0 -8px 0 #25351c;
+            transform: rotate(-6deg);
+        }
+
+        /* verdian card collection */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin: 3rem 0 4rem;
+        }
+
+        .card {
+            background: rgba(18, 32, 12, 0.55);
+            backdrop-filter: blur(14px);
+            border: 1px solid #5d874b;
+            border-bottom: 4px solid #8db86b;
+            border-radius: 32px;
+            padding: 2.6rem 2rem;
+            transition: 0.3s;
+            box-shadow: 0 25px 40px -20px #000;
+        }
+
+        .card:hover {
+            background: rgba(30, 55, 20, 0.75);
+            border-color: #d1ffaa;
+            border-bottom-color: #c6ff99;
+            transform: translateY(-9px);
+            box-shadow: 0 45px 70px -28px black;
+        }
+
+        .card-icon {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 6px 8px black);
+        }
+
+        .card h3 {
+            font-size: 2rem;
+            font-weight: 440;
+            color: #f2ffd3;
+        }
+
+        .micro-link {
+            text-decoration: none;
+            color: #d4ffb0;
+            font-weight: 550;
+            border-bottom: 1.2px solid #8eb368;
+            padding-bottom: 4px;
+            display: inline-flex;
+            gap: 0.5rem;
+            transition: 0.2s;
+        }
+        .micro-link:hover { gap: 1rem; color: #fff; border-bottom-color: #f2ffc6; }
+
+        /* bespoke bar */
+        .bespoke-bar {
+            display: flex;
+            gap: 2rem;
+            background: #0b1308e0;
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 2rem 2.5rem;
+            margin: 3.5rem 0;
+            border: 1px solid #577a46;
+            box-shadow: inset 0 0 20px #00000060;
+        }
+
+        .bespoke-item {
+            flex: 1;
+            text-align: center;
+        }
+        .bespoke-item span { font-size: 3.2rem; display: block; }
+
+        /* premium vault split */
+        .vault-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2.8rem;
+            margin: 4rem 0;
+        }
+
+        /* footer premium */
+        .footer {
+            margin-top: 6rem;
+            padding: 2.5rem 0 2rem;
+            border-top: 1px solid #436a36;
+            display: flex;
+            justify-content: space-between;
+            color: #b6daa1;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .footer-links a {
+            color: #e2ffc7;
+            text-decoration: none;
+            border-bottom: 1px dotted #779e63;
+        }
+
+        ::selection { background: #abff78; color: #0a1c05; }
+        ::-webkit-scrollbar { width: 7px; background: #10190c; }
+        ::-webkit-scrollbar-thumb { background: #5d8849; border-radius: 10px; }
+
+        /* responsive */
+        @media (max-width: 1000px) {
+            .hero { grid-template-columns: 1fr; }
+            .emblem { margin: 0 auto; width: 340px; height: 340px; }
+            .collection-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        @media (max-width: 700px) {
+            .container { padding: 1.8rem; }
+            .collection-grid { grid-template-columns: 1fr; }
+            .navbar { flex-direction: column; gap: 1.2rem; }
+            .nav-links { gap: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- ---------- PREMIUM NAVIGATION – SECTIONS LINKED ---------- -->
+        <div class="navbar">
+            <div class="logo">ꝞERDIAN</div>
+            <div class="nav-links">
+                <a href="#hero">ATELIER</a>
+                <a href="#objets">OBJETS</a>
+                <a href="#bespoke">BESPOKE</a>
+                <a href="#vault">VAULT</a>
+                <a href="#ethos">ETHOS</a>
+            </div>
+        </div>
+
+        <!-- ========== HERO SECTION (linked) ========== -->
+        <span id="hero" class="section-anchor"></span>
+        <div class="hero">
+            <div>
+                <span style="display:inline-block; background:#1e2f1ab0; backdrop-filter:blur(4px); padding:0.5rem 1.8rem; border-radius:60px; letter-spacing:5px; border:1px solid #7ea862; color:#f1ffe3; font-size:0.8rem; margin-bottom:1.4rem;">✦ VERDIAN 24K PATINA</span>
+                <h1>wet forest<br>brutalism</h1>
+                <div style="width:120px; height:2px; background:linear-gradient(90deg,#cbff9a,#608a4c); margin:1.8rem 0 1.5rem;"></div>
+                <p>Chlorophyll–carbon alloy. Hand-polished obsidian base. Each verdian piece carries a black-jade certificate. This is not green — this is Verdian. Fucking premium, anchored in the earth.</p>
+                <div>
+                    <a href="#objets" class="btn">⤋ ENTER THE CANOPY</a>
+                    <a href="#bespoke" class="btn" style="background:transparent; border-color:#6b9558;">⤋ BESPOKE</a>
+                </div>
+            </div>
+            <div class="emblem"></div>
+        </div>
+
+        <!-- ========== OBJETS / COLLECTION (linked) ========== -->
+        <span id="objets" class="section-anchor"></span>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:2rem;">
+            <h2>Verdian ∞ objets</h2>
+            <span style="color:#b5f28a; letter-spacing:5px; font-weight:350;">SIGNATURE ⓿</span>
+        </div>
+        <div style="width:200px; height:2px; background:linear-gradient(90deg,#b3ff82,#45633b); margin:0.6rem 0 1rem;"></div>
+
+        <div class="collection-grid">
+            <div class="card">
+                <div class="card-icon">⸙</div>
+                <h3>Onyx moss</h3>
+                <p style="color:#cbe8bc; margin:0.8rem 0 1.8rem;">14 layers wet-look oleoresin, volcanic aggregate. 42 editions.</p>
+                <a href="#bespoke" class="micro-link">INQUIRE →</a>
+            </div>
+            <div class="card">
+                <div class="card-icon">⎔</div>
+                <h3>Chthonic jade</h3>
+                <p style="color:#cbe8bc; margin:0.8rem 0 1.8rem;">Nephrite from fossil beds, carbon backplate. museum grade.</p>
+                <a href="#bespoke" class="micro-link">ARCHIVE →</a>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚲</div>
+                <h3>Gilded sap</h3>
+                <p style="color:#cbe8bc; margin:0.8rem 0 1.8rem;">24k gold leaf in bio-resin, shifts from emerald to vert bronze.</p>
+                <a href="#vault" class="micro-link">SECURE →</a>
+            </div>
+        </div>
+
+        <!-- ========== BESPOKE SECTION (linked) ========== -->
+        <span id="bespoke" class="section-anchor"></span>
+        <div style="margin-top: 2.2rem; display:flex; align-items:baseline; gap:1rem;">
+            <h2 style="font-size:2.4rem;">bespoke  atelier</h2>
+            <span style="color:#aad68f; letter-spacing:6px;">────  PRIVATE  COLLECTION</span>
+        </div>
+        <div class="bespoke-bar">
+            <div class="bespoke-item">
+                <span>⏂</span>
+                <h4 style="color:#f4ffe6; font-weight:400;">Verdian 834</h4>
+                <p style="color:#c2e0ad;">green obsidian, diamond dust</p>
+            </div>
+            <div class="bespoke-item">
+                <span>⟠</span>
+                <h4 style="color:#f4ffe6; font-weight:400;">Chlorophyll silk</h4>
+                <p style="color:#c2e0ad;">oxidized copper thread</p>
+            </div>
+            <div class="bespoke-item">
+                <span>⍟</span>
+                <h4 style="color:#f4ffe6; font-weight:400;">Basalt & fern</h4>
+                <p style="color:#c2e0ad;">petrified wood, verdian bronze</p>
+            </div>
+            <div class="bespoke-item">
+                <span>⌬</span>
+                <h4 style="color:#f4ffe6; font-weight:400;">Black malachite</h4>
+                <p style="color:#c2e0ad;">300 grit, rare earth pigment</p>
+            </div>
+        </div>
+
+        <!-- ========== VAULT SECTION (linked) ========== -->
+        <span id="vault" class="section-anchor"></span>
+        <div class="vault-section">
+            <div style="background:rgba(8, 18, 5, 0.8); backdrop-filter:blur(10px); padding:3rem 2.5rem; border-radius:36px; border:1px solid #668b53;">
+                <span style="font-size:3.5rem; color:#d6ffb3;">⛂</span>
+                <h3 style="font-size:2.2rem; font-weight:400; margin:0.6rem 0 1rem;">verdian vault</h3>
+                <p style="color:#d1f0bf; margin-bottom:2.2rem;">Bi‑olocked archive. Proto‑verdian artifacts, forbidden patinas, and the only 24k chlorophyll composite in existence.</p>
+                <a href="#ethos" class="btn" style="background:#1f331b;">🔓 UNLOCK ACCESS</a>
+            </div>
+            <div style="display:flex; flex-direction:column; justify-content:center; padding:1.8rem;">
+                <span style="letter-spacing:12px; text-transform:uppercase; color:#b8ee8a; font-size:0.9rem;">──  ETHOS</span>
+                <h3 style="font-size:2.1rem; font-weight:370; line-height:1.3; margin:1rem 0 0.8rem;">"the most expensive green in the spectrum"</h3>
+                <div style="border-left:4px solid #94c470; padding-left:1.8rem;">
+                    <p style="font-size:1.2rem; color:#e2ffc3;">Verdian appreciates. Each piece carries a 24k guarantee and perpetual maintenance ritual.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== ETHOS / FOOTER ANCHOR (linked) ========== -->
+        <span id="ethos" class="section-anchor"></span>
+        <div style="display:flex; gap:2rem; margin:3rem 0 2rem; padding:2.2rem; background:#0b1509b0; border-radius:36px; border:1px solid #698a55;">
+            <div style="font-size:2.4rem; color:#adff80;">⛋</div>
+            <div>
+                <span style="font-weight:600; color:#ecffd6; letter-spacing:8px; font-size:0.9rem;">VERDIAN MANIFESTO</span>
+                <p style="font-size:1.3rem; font-weight:300; color:#dcf5c5; margin-top:0.8rem;">No faux green. No digital moss. Only wet-patina matter, forged in black emerald and finished with 24k respect. Sections linked — because premium demands precision.</p>
+            </div>
+        </div>
+
+        <!-- ========== FOOTER – links to all sections ========== -->
+        <div class="footer">
+            <div style="font-size:1.3rem; font-weight:500;">ꝞERDIAN —  since 1947 (imaginary, absolute)</div>
+            <div class="footer-links">
+                <a href="#hero">ATELIER</a>
+                <a href="#objets">OBJETS</a>
+                <a href="#bespoke">BESPOKE</a>
+                <a href="#vault">VAULT</a>
+                <a href="#ethos">ETHOS</a>
+                <span style="color:#c2f098;">Ⓥ</span>
+            </div>
+        </div>
+        <div style="text-align:right; color:#8bb378; margin-top:1.2rem; padding-bottom:1.5rem; letter-spacing:3px; font-size:0.7rem; border-top:1px solid #3a5731; padding-top:1.8rem;">
+            VERDIAN · 24K PATINA · HYPERLINKED SECTIONS · FUCKING PREMIUM
+        </div>
+    </div>
+    <!-- everything anchored, dripping verdian — pure bespoke -->
+</body>
+</html>

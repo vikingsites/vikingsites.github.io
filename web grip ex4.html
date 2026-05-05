@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CinemaPrime · premium motion</title>
+    <!-- Font Awesome 6 (free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0c10;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #fff;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* smooth import for Inter (optional fallback) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
+
+        /* cinematic overlay & grain */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1100;
+            opacity: 0.03;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc0IiBudW1PY3RhdmVzPSIzIiAvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4xIiAvPjwvc3ZnPg==');
+        }
+
+        /* main container with perspective */
+        .site-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 4rem 6rem;
+            transform-style: preserve-3d;
+        }
+
+        /* HEADER – cinematic entrance */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0 3rem;
+            opacity: 0;
+            animation: fadeGlide 1.4s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+            animation-delay: 0.2s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #fff 0%, #bbb 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-text-fill-color: #fff;
+            margin-right: 8px;
+            font-size: 2rem;
+            opacity: 0.8;
+        }
+
+        .nav {
+            display: flex;
+            gap: 3rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .nav a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #e50914;
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #fff;
+        }
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* HERO – cinematic full bleed inside wrapper */
+        .hero {
+            margin: 4rem 0 6rem;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeGlide 1.2s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero-title {
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .hero-title span {
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin: 1.8rem 0 2.5rem;
+            max-width: 80%;
+            border-left: 3px solid #e50914;
+            padding-left: 1.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.4rem;
+            border: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -10%;
+            width: 0%;
+            height: 100%;
+            background: #e50914;
+            transition: width 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+            transform: skewX(-15deg);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            border-color: #e50914;
+            color: #fff;
+        }
+        .btn:hover::before {
+            width: 120%;
+        }
+
+        .btn-primary {
+            background: #e50914;
+            border-color: #e50914;
+        }
+        .btn-primary::before {
+            background: #b0060f;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.7), 0 0 0 2px rgba(229, 9, 20, 0.2) inset;
+            transform: perspective(800px) rotateY(-4deg) scale(1.02);
+            transition: transform 1s ease;
+            filter: brightness(0.9) contrast(1.2);
+        }
+
+        .hero-image:hover {
+            transform: perspective(800px) rotateY(0deg) scale(1.05);
+            filter: brightness(1) contrast(1.1);
+        }
+
+        .badge {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            background: #e50914;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            clip-path: polygon(10% 0%, 100% 0, 100% 70%, 90% 100%, 0 100%, 0% 30%);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        /* FEATURED GRID – cinematic cards */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin: 5rem 0 2.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 0.8rem;
+            opacity: 0;
+            animation: fadeGlide 0.8s forwards;
+            animation-delay: 0.8s;
+        }
+
+        .section-title i {
+            color: #e50914;
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            opacity: 0;
+            animation: fadeGlide 1s forwards;
+            animation-delay: 1s;
+        }
+
+        .card {
+            background: rgba(20, 22, 27, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateY(0) scale(1);
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.7);
+        }
+
+        .card:hover {
+            transform: translateY(-16px) scale(1.02);
+            box-shadow: 0 30px 50px -10px #e5091420, 0 0 0 1px #e5091430;
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.2, 0.9, 0.3, 1);
+            filter: saturate(1.2) contrast(1.1);
+        }
+
+        .card:hover .card-img img {
+            transform: scale(1.15);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none;
+        }
+
+        .card-content {
+            padding: 1.8rem 1.5rem 2rem;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1.5rem;
+            color: #aaa;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-meta i {
+            color: #e50914;
+            width: 16px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .card p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* LIST / SECONDARY SECTION with parallax speed */
+        .list-section {
+            margin: 6rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            opacity: 0;
+            animation: fadeGlide 1s forwards;
+            animation-delay: 1.2s;
+        }
+
+        .list-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: center;
+            transition: transform 0.4s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+            padding-bottom: 1rem;
+        }
+
+        .list-item:hover {
+            transform: translateX(12px);
+        }
+
+        .list-index {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #333;
+            -webkit-text-stroke: 1px #e50914;
+            width: 50px;
+            text-align: right;
+        }
+
+        .list-content h4 {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .list-content span {
+            color: #777;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .trailer-badge {
+            background: #e50914;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            margin-left: 1rem;
+        }
+
+        .quote-block {
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(8px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid #ffffff08;
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.5;
+            box-shadow: 0 30px 40px -25px #000;
+        }
+
+        .quote-author {
+            margin-top: 1.5rem;
+            color: #e50914;
+            font-style: normal;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* footer */
+        .footer {
+            margin-top: 6rem;
+            display: flex;
+            justify-content: space-between;
+            color: #555;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            border-top: 1px solid #ffffff08;
+            padding-top: 2.5rem;
+            opacity: 0;
+            animation: fadeGlide 1s forwards;
+            animation-delay: 1.6s;
+        }
+
+        .social i {
+            font-size: 1.5rem;
+            margin-left: 1.5rem;
+            color: #666;
+            transition: color 0.3s;
+        }
+        .social i:hover {
+            color: #e50914;
+        }
+
+        /* animations */
+        @keyframes fadeGlide {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* cinematic vignette */
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            box-shadow: inset 0 0 150px rgba(0,0,0,0.9);
+            pointer-events: none;
+            z-index: 1000;
+            border-radius: 0; /* keep full */
+        }
+
+        /* responsive */
+        @media (max-width: 1000px) {
+            .site-wrapper { padding: 1.5rem 2rem 4rem; }
+            .hero { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: repeat(2, 1fr); }
+            .list-section { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .header { flex-direction: column; gap: 1.5rem; }
+            .nav { gap: 1.5rem; }
+        }
+
+        /* extra cinematic flair */
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #e5091410, transparent 70%);
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .hero-visual .glow {
+            background: radial-gradient(circle at 70% 30%, #e5091430, transparent 70%);
+        }
+
+        /* remove default img spacing */
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        /* custom placeholder images via unsplash (cinematic style) */
+        .img-placeholder {
+            background: #2a2c34;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+
+    <div class="site-wrapper">
+        <!-- header with cinematic motion -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-clapperboard"></i> CINEMA PRIME
+            </div>
+            <nav class="nav">
+                <a href="#">Releases</a>
+                <a href="#">Series</a>
+                <a href="#">Stories</a>
+                <a href="#">Watchlist</a>
+            </nav>
+        </header>
+
+        <!-- hero section -->
+        <div class="hero">
+            <div>
+                <h1 class="hero-title">
+                    WHERE <span>CINEMA</span><br>MEETS <span>MOTION</span>
+                </h1>
+                <div class="hero-sub">
+                    Experience ultra-premium visual storytelling. every frame, every sound, curated for the big screen — in your browser.
+                </div>
+                <div class="hero-cta">
+                    <button class="btn btn-primary"><i class="fas fa-play" style="margin-right: 8px;"></i> WATCH TRAILER</button>
+                    <button class="btn"><i class="fas fa-plus"></i> WATCHLIST</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="glow"></div>
+                <img class="hero-image" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop" alt="cinematic scene">
+                <div class="badge">EXCLUSIVE</div>
+            </div>
+        </div>
+
+        <!-- featured media grid -->
+        <div class="section-title"><i class="fas fa-film"></i> NEW & PREMIERE</div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2070&auto=format&fit=crop" alt="movie scene">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta"><span><i class="fas fa-star"></i> 8.9</span> <span><i class="fas fa-clock"></i> 2h 18m</span></div>
+                    <h3>NEBULA’S EDGE</h3>
+                    <p>Sci‑fi epic with breathtaking visuals and a haunting score.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=2070&auto=format&fit=crop" alt="cinematic portrait">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta"><span><i class="fas fa-star"></i> 9.2</span> <span><i class="fas fa-clock"></i> 2h 45m</span></div>
+                    <h3>THE LAST AUTEUR</h3>
+                    <p>Intimate drama shot on 70mm, nominated for 10 awards.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?q=80&w=2070&auto=format&fit=crop" alt="behind scenes">
+                    <div class="card-overlay"></div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta"><span><i class="fas fa-star"></i> 8.7</span> <span><i class="fas fa-clock"></i> 1h 56m</span></div>
+                    <h3>MOTION & LIGHT</h3>
+                    <p>Documentary about legendary cinematographers.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- list & quote (cinema vibe) -->
+        <div class="list-section">
+            <div>
+                <div class="section-title" style="margin-top:0;"><i class="fas fa-ticket-alt"></i> TOP PICKS</div>
+                <div class="list-item">
+                    <div class="list-index">01</div>
+                    <div class="list-content">
+                        <h4>MIDNIGHT IN TOKYO <span class="trailer-badge">new 4k</span></h4>
+                        <span>dir. Sofia Yamazaki · 2025</span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-index">02</div>
+                    <div class="list-content">
+                        <h4>IRON DREAMS</h4>
+                        <span>dir. Christopher Nolan · IMAX</span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-index">03</div>
+                    <div class="list-content">
+                        <h4>THE CRIMSON WING</h4>
+                        <span>dir. Greta Gerwig · restored</span>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="list-index">04</div>
+                    <div class="list-content">
+                        <h4>SOLSTICE</h4>
+                        <span>dir. Denis Villeneuve · premiere</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-block">
+                <i class="fas fa-quote-left" style="color:#e50914; opacity:0.5; margin-right:10px;"></i>
+                Cinema is a matter of what’s in the frame and what’s out. Every motion here is designed to stir.
+                <div class="quote-author">— MICHAEL B. , curator</div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer class="footer">
+            <div>© 2025 CINEMA PRIME — THE ART OF MOVING IMAGE</div>
+            <div class="social">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-vimeo-v"></i>
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-letterboxd"></i>
+            </div>
+        </footer>
+    </div>
+
+    <!-- small script for extra dynamic delay or hover (no heavy logic) -->
+    <script>
+        (function() {
+            // just a subtle parallax effect for hero image on mouse move – optional premium feel
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage) {
+                document.querySelector('.hero-visual').addEventListener('mousemove', (e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateY = (x - centerX) * 0.02;
+                    const rotateX = (centerY - y) * 0.01;
+                    heroImage.style.transform = `perspective(800px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
+                });
+                document.querySelector('.hero-visual').addEventListener('mouseleave', () => {
+                    heroImage.style.transform = `perspective(800px) rotateY(-4deg) scale(1.02)`;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viking Sites · premium digital craftsmanship</title>
+  <!-- Feather icons -->
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <!-- Google Fonts: Inter + Playfair Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <style>
+    /* ---------- RESET / GLOBAL ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* THEME VARIABLES — light & dark */
+    :root {
+      --bg-primary: #fafaf8;
+      --bg-secondary: #ffffff;
+      --bg-soft: #f5f5f2;
+      --text-primary: #1c1c1a;
+      --text-secondary: #4a4a48;
+      --text-soft: #6b6b67;
+      --border-light: #e8e8e4;
+      --border-soft: #f0f0ec;
+      --card-bg: white;
+      --card-shadow: 0 30px 50px -20px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.02);
+      --accent-gradient: linear-gradient(145deg, #2b2b28, #3d3d39);
+      --btn-hover: #32322e;
+      --footer-bg: #f4f4f1;
+      --chat-bot-bubble: white;
+      --chat-user-bubble: #1c1c1a;
+      --icon-bg: white;
+      --grip-illustration: #d6d6d2;
+    }
+
+    body.dark-theme {
+      --bg-primary: #131312;
+      --bg-secondary: #1e1e1b;
+      --bg-soft: #252522;
+      --text-primary: #efefeb;
+      --text-secondary: #bcbcb6;
+      --text-soft: #999994;
+      --border-light: #33332f;
+      --border-soft: #2b2b28;
+      --card-bg: #1c1c1a;
+      --card-shadow: 0 30px 50px -20px rgba(0,0,0,0.5), 0 1px 2px rgba(255,255,255,0.02);
+      --accent-gradient: linear-gradient(145deg, #c0c0bb, #a0a09b);
+      --btn-hover: #4a4a47;
+      --footer-bg: #181816;
+      --chat-bot-bubble: #2a2a27;
+      --chat-user-bubble: #3d3d39;
+      --icon-bg: #2b2b28;
+      --grip-illustration: #4a4a47;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s ease, color 0.2s ease;
+      position: relative;
+    }
+
+    /* ---------- VESAK BACKGROUND GLOW (moonlight) ---------- */
+    body::after {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,220,100,0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 70% 80%, rgba(255,180,50,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      animation: moonPulse 12s ease-in-out infinite;
+    }
+
+    @keyframes moonPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- PREMIUM SCROLLBAR ---------- */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-soft);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #9b9b97;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7a7a76;
+    }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    h1, h2, h3, h4 {
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: 2.75rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subhead {
+      font-size: 1.25rem;
+      font-weight: 350;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ---------- ACCENT / VIKING TEXT ---------- */
+    .viking-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 500;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .overline {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      font-weight: 600;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    /* ---------- BUTTONS & LINKS ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 36px;
+      font-size: 1rem;
+      font-weight: 500;
+      border-radius: 48px;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      background: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      box-shadow: 0 10px 18px -8px rgba(0,0,0,0.16);
+    }
+
+    .btn-primary:hover {
+      background: var(--btn-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 24px 30px -10px rgba(0,0,0,0.25);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--text-primary);
+      color: var(--text-primary);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    /* ---------- THEME TOGGLE ---------- */
+    .theme-toggle {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-light);
+      border-radius: 60px;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 70px;
+      height: 40px;
+      position: relative;
+      cursor: pointer;
+      margin-left: 16px;
+      transition: background 0.3s;
+      backdrop-filter: blur(4px);
+    }
+
+    .theme-toggle i {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.6;
+      color: var(--text-primary);
+      z-index: 2;
+    }
+
+    .theme-toggle .toggle-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: transparent;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      background: var(--card-bg);
+      border-radius: 50%;
+      left: 4px;
+      top: 3px;
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-light);
+    }
+
+    body.dark-theme .toggle-slider {
+      transform: translateX(30px);
+    }
+
+    /* ---------- HEADER & LOGO ---------- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-text {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .logo-text span {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* ---------- INTRO ANIMATION OVERLAY  ---------- */
+    .intro-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1), visibility 1.2s;
+      pointer-events: auto;
+      backdrop-filter: blur(0px);
+    }
+
+    .intro-overlay.hide-intro {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-viking {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 600;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
+      transform: scale(0.9);
+      animation: introPulse 1s ease-out forwards, introGlow 1.2s alternate infinite;
+      text-align: center;
+    }
+
+    .intro-sub {
+      margin-top: 1.2rem;
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    @keyframes introPulse {
+      0% { transform: scale(0.85); opacity: 0; letter-spacing: 0.2em; }
+      40% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; letter-spacing: normal; }
+    }
+
+    @keyframes introGlow {
+      0% { text-shadow: 0 0 0px rgba(0,0,0,0); }
+      100% { text-shadow: 0 0 12px rgba(0,0,0,0.2); }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding: 48px 0 80px 0;
+      align-items: center;
+    }
+
+    .hero-grip-symbol {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .grip-image-container {
+      background: var(--grip-illustration);
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.18);
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border: 1px solid var(--border-light);
+      transition: box-shadow 0.4s, transform 0.4s;
+    }
+
+    .grip-image-container:hover {
+      box-shadow: 0 40px 60px -20px rgba(0,0,0,0.3);
+      transform: scale(1.01);
+    }
+
+    .grip-picture-premium {
+      background: linear-gradient(145deg, var(--grip-illustration), color-mix(in srgb, var(--grip-illustration) 80%, black));
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .grip-card {
+      background: var(--card-bg);
+      padding: 38px 32px;
+      border-radius: 36px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
+      max-width: 480px;
+      backdrop-filter: blur(2px);
+      transition: background 0.3s, border-color 0.2s, box-shadow 0.3s;
+    }
+
+    .grip-metrics {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .metric-number {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* METHUKA SECTION background fix (blur + overlay) */
+    #methuka-section {
+      position: relative;
+      border-radius: 60px;
+      overflow: hidden;
+      margin: 50px 0;
+    }
+
+    #methuka-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left:0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Methz.dev.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(4px) brightness(0.65);
+      border-radius: 60px;
+      z-index: 0;
+    }
+
+    #methuka-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .team-section {
+      background: var(--bg-secondary);
+      border-radius: 60px;
+      margin: 40px 0;
+      transition: background 0.3s;
+      padding: 20px 0;
+    }
+
+    /*----About Viking Sites----*/
+    #Webgrip-section {
+      position: relative;
+      border-radius: 80px;
+      overflow: hidden;
+    }
+
+    #Webgrip-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Methzzz.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(4px) brightness(0.6);
+      border-radius: 80px;
+      z-index: 0;
+    }
+
+    #Webgrip-section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- TEAM SECTIONS STYLES ---------- */
+    .team-section {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+      border-radius: 80px;
+      margin: 60px 0;
+      transition: background 0.3s;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 48px;
+      margin-top: 48px;
+    }
+    .team-card {
+      background: var(--card-bg);
+      border-radius: 32px;
+      padding: 40px 28px;
+      text-align: center;
+      border: 1px solid var(--border-soft);
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+      box-shadow: var(--card-shadow);
+    }
+    .team-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--text-soft);
+      box-shadow: 0 30px 45px -15px rgba(0,0,0,0.12);
+    }
+    .team-avatar {
+      width: 120px;
+      height: 120px;
+      background: var(--accent-gradient);
+      border-radius: 60px;
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 500;
+      color: white;
+      box-shadow: 0 12px 24px -8px rgba(0,0,0,0.2);
+    }
+    .team-name {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .team-role {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 500;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+    .team-bio {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .team-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--border-light);
+      margin: 20px auto;
+    }
+    /* ---------- CLIENTS ---------- */
+    .clients {
+      padding: 60px 0 30px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .client-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      color: var(--text-soft);
+    }
+
+    .client-logo {
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      font-family: 'Playfair Display', serif;
+      opacity: 0.8;
+      transition: opacity 0.2s, color 0.2s;
+    }
+
+    .client-logo:hover {
+      opacity: 1;
+      color: var(--text-primary);
+    }
+
+    /* ---------- SERVICES ---------- */
+    .services {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+      margin-top: 60px;
+      border-radius: 80px 80px 0 0;
+      box-shadow: 0 -6px 20px rgba(0,0,0,0.02);
+      transition: background 0.3s;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .service-card {
+      background: var(--bg-primary);
+      padding: 38px 28px;
+      border-radius: 28px;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1);
+      border: 1px solid var(--border-soft);
+    }
+
+    .service-card:hover {
+      background: var(--card-bg);
+      border-color: var(--text-soft);
+      box-shadow: 0 25px 35px -14px rgba(0,0,0,0.05);
+      transform: translateY(-6px);
+    }
+
+    .service-icon {
+      background: var(--icon-bg);
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      border: 1px solid var(--border-light);
+      color: var(--text-primary);
+    }
+
+    .service-card h3 {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 18px;
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      color: var(--text-secondary);
+      font-weight: 350;
+      font-size: 1.05rem;
+    }
+
+    /* ---------- PORTFOLIO SECTION ---------- */
+    .portfolio {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .portfolio-item {
+      border-radius: 28px;
+      overflow: hidden;
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      transition: all 0.35s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 45px -15px rgba(0,0,0,0.12);
+      border-color: var(--text-soft);
+    }
+
+    .portfolio-image {
+      height: 260px;
+      background: var(--grip-illustration);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-size: 3rem;
+      opacity: 0.9;
+      transition: opacity 0.3s;
+    }
+
+    .portfolio-item:hover .portfolio-image {
+      opacity: 1;
+    }
+
+    .portfolio-content {
+      padding: 32px;
+    }
+
+    .portfolio-content h3 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .portfolio-content p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+    }
+
+    .portfolio-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: var(--bg-soft);
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-right: 12px;
+    }
+
+    /* ---------- GET IN TOUCH / CONTACT SECTION ---------- */
+    .contact {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+      border-radius: 80px 80px 0 0;
+      margin-top: 40px;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .contact-info h2 {
+      margin-bottom: 24px;
+    }
+
+    .contact-details {
+      margin-top: 40px;
+    }
+
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .contact-detail-item i {
+      width: 24px;
+      height: 24px;
+      color: var(--text-primary);
+    }
+
+    .contact-form {
+      background: var(--card-bg);
+      padding: 48px;
+      border-radius: 32px;
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--card-shadow);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      font-size: 1rem;
+      color: var(--text-primary);
+      transition: border 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--text-primary);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 48px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .contact-btn:hover {
+      background: var(--btn-hover);
+      transform: translateY(-3px);
+    }
+
+    /* ---------- CASE STUDIES ---------- */
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin: 48px 0;
+    }
+
+    .case-item {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .case-tag {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-soft);
+    }
+
+    .case-title {
+      font-size: 1.9rem;
+      font-weight: 450;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .case-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 6px;
+      align-self: flex-start;
+      transition: border 0.2s, gap 0.2s;
+    }
+
+    .case-cta:hover {
+      border-bottom-color: var(--text-primary);
+      gap: 16px;
+    }
+
+    /* ---------- TESTIMONIAL ---------- */
+    .testimonial {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      padding: 100px 0;
+      margin: 60px 0 0;
+      border-radius: 0 0 80px 80px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-theme .testimonial {
+      background: #2a2a27;
+      color: #f0f0ec;
+    }
+
+    .testimonial-content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .quote-icon {
+      font-size: 5rem;
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+      opacity: 0.7;
+    }
+
+    .testimonial-text {
+      font-size: 1.8rem;
+      font-weight: 380;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      padding: 70px 0 100px;
+      background: var(--footer-bg);
+      transition: background 0.3s;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+
+    .footer-logo span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .footer p {
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .newsletter {
+      display: flex;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 12px;
+      margin-top: 20px;
+    }
+
+    .newsletter input {
+      background: transparent;
+      border: none;
+      flex: 1;
+      font-size: 1rem;
+      padding: 8px 0;
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .newsletter input::placeholder {
+      color: var(--text-soft);
+    }
+
+    .newsletter button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    /* ---------- VESAK LANTERNS ---------- */
+    #vesak-lanterns {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .lantern {
+      position: absolute;
+      bottom: -80px;
+      width: 36px;
+      height: 48px;
+      background: radial-gradient(circle at 30% 25%, #ffd966, #f28c1e);
+      border-radius: 40% 40% 45% 45%;
+      box-shadow: 0 0 25px #ffaa00, 0 0 55px #ff7f00;
+      animation: floatLantern linear infinite;
+      transform-origin: center bottom;
+    }
+
+    .lantern::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 6px;
+      background: #b45309;
+      border-radius: 2px;
+    }
+
+    .lantern::after {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 16px;
+      background: #ffb800;
+      box-shadow: 0 0 6px #ff9900;
+    }
+
+    /* Lantern color variants */
+    .lantern.red {
+      background: radial-gradient(circle at 30% 25%, #ff7070, #cc0000);
+      box-shadow: 0 0 25px #ff4444, 0 0 55px #cc0000;
+    }
+    .lantern.yellow {
+      background: radial-gradient(circle at 30% 25%, #ffe484, #e6a800);
+      box-shadow: 0 0 25px #ffcc00, 0 0 55px #e6a800;
+    }
+    .lantern.pink {
+      background: radial-gradient(circle at 30% 25%, #ffb3d9, #e05297);
+      box-shadow: 0 0 25px #ff66b2, 0 0 55px #e05297;
+    }
+
+    @keyframes floatLantern {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-110vh) rotate(8deg) scale(0.85);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- VESAK DIYAS (oil lamps) ---------- */
+    .diya {
+      position: fixed;
+      bottom: 20px;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 50% 40%, #ffdd88, #ff8800);
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 0 20px #ffaa00, 0 0 40px #ff7700;
+      pointer-events: none;
+      z-index: 1001;
+      animation: diyaFloat 4s ease-in-out infinite;
+    }
+
+    .diya::after {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 12px;
+      background: #ffcc66;
+      border-radius: 50% 50% 20% 20%;
+      box-shadow: 0 0 12px #ff9900;
+      animation: flameWiggle 0.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes diyaFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes flameWiggle {
+      0% { transform: translateX(-50%) rotate(-2deg); }
+      100% { transform: translateX(-50%) rotate(2deg); }
+    }
+
+    /* ---------- LOTUS PETALS ---------- */
+    .lotus-petal {
+      position: fixed;
+      width: 14px;
+      height: 20px;
+      background: linear-gradient(135deg, #ffb7c5, #ff8da1);
+      border-radius: 50% 0 50% 50%;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 1000;
+      animation: petalFall linear infinite;
+      transform: rotate(45deg);
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- VESAK GREETING ---------- */
+    #vesak-greeting {
+      position: fixed;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 998;
+      pointer-events: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: #fbbf24;
+      text-shadow: 0 0 20px #ffaa00, 0 0 40px #ff7f00;
+      animation: greetingGlow 3s ease-in-out infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes greetingGlow {
+      0%, 100% { text-shadow: 0 0 20px #ffaa00, 0 0 40px #ff7f00; transform: translateX(-50%) translateY(0); }
+      50% { text-shadow: 0 0 35px #ffbb00, 0 0 70px #ffaa00; transform: translateX(-50%) translateY(-6px); }
+    }
+
+    /* ---------- VESAK CORNER (Temple + Buddha SVG) ---------- */
+    #vesak-corner {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      pointer-events: none;
+      filter: drop-shadow(0 0 18px rgba(255, 180, 0, 0.7));
+    }
+
+    .vesak-icon {
+      width: 68px;
+      height: 68px;
+      fill: #fbbf24;
+      opacity: 0.95;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+      animation: gentleFloat 3.5s ease-in-out infinite;
+    }
+
+    .buddha-icon {
+      width: 60px;
+      height: 60px;
+      animation-delay: 0.6s;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 1024px) {
+      h1 { font-size: 3rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-grip-symbol { justify-content: flex-start; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .contact-container { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .navbar { flex-direction: column; gap: 24px; }
+      .nav-links { flex-wrap: wrap; justify-content: center; gap: 28px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .case-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .contact-form { padding: 32px; }
+      .intro-viking { font-size: 3rem; }
+      #vesak-greeting { font-size: 1.5rem; top: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- INTRO ANIMATION OVERLAY -->
+  <div id="introOverlay" class="intro-overlay">
+    <div class="intro-viking">VIKING SITES</div>
+    <div class="intro-sub">premium digital craftsmanship</div>
+  </div>
+
+  <!-- VESAK LANTERNS CONTAINER -->
+  <div id="vesak-lanterns"></div>
+
+  <!-- VESAK CORNER: TEMPLE + BUDDHA SVG -->
+  <div id="vesak-corner">
+    <!-- Temple SVG (pagoda silhouette) -->
+    <svg class="vesak-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4 L8 20 L12 20 L12 40 L8 40 L8 44 L24 44 L24 40 L20 40 L20 20 L24 20 L32 10 L40 20 L44 20 L44 40 L40 40 L40 44 L56 44 L56 40 L52 40 L52 20 L56 20 Z" />
+      <rect x="28" y="44" width="8" height="16" />
+      <rect x="26" y="56" width="12" height="4" />
+    </svg>
+
+    <!-- Buddha statue SVG (meditating silhouette) -->
+    <svg class="vesak-icon buddha-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="32" cy="58" rx="18" ry="4" />
+      <path d="M32 16 C28 16 26 20 26 24 L26 34 C26 42 32 48 32 48 C32 48 38 42 38 34 L38 24 C38 20 36 16 32 16 Z" />
+      <circle cx="32" cy="24" r="4" />
+      <path d="M20 36 C18 40 22 44 32 44 C42 44 46 40 44 36" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M24 26 L22 20 M40 26 L42 20" stroke="currentColor" stroke-width="2" fill="none" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <!-- PREMIUM HEADER with new logo & theme toggle -->
+  <div class="container">
+    <nav class="navbar">
+      <div class="logo">
+        <div class="logo-icon">
+          <!-- Custom Viking Shield Logo SVG -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 2L4 10V22C4 32 24 46 24 46C24 46 44 32 44 22V10L24 2Z" stroke="currentColor" stroke-width="2" fill="var(--text-primary)" />
+            <path d="M24 6V38" stroke="var(--bg-primary)" stroke-width="2" />
+            <path d="M14 14L24 6L34 14" stroke="var(--bg-primary)" stroke-width="2" fill="none"/>
+            <circle cx="24" cy="20" r="3" fill="var(--bg-primary)" />
+          </svg>
+        </div>
+        <div class="logo-text">viking <span>sites</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 24px;">
+        <div class="nav-links">
+          <a href="#methuka-section">Owner</a>
+          <a href="#team-section">About members</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#work">Work</a>
+          <a href="#contact">Get in touch</a>
+        </div>
+        <div class="theme-toggle" id="themeToggle">
+          <div class="toggle-slider"></div>
+          <div class="toggle-icon">
+            <i data-feather="sun"></i>
+          </div>
+          <div class="toggle-icon">
+            <i data-feather="moon"></i>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- HERO SECTION -->
+  <div class="container">
+    <div class="hero">
+      <div>
+        <span class="overline">✦ digital craftsmanship since 2024</span>
+        <h1>Crafted for<br>those who <span class="viking-text">conquer</span> <br>excellence.</h1>
+        <p class="section-subhead" style="margin-top: 1.5rem; max-width: 500px;">
+          Viking Sites builds high stakes digital experiences resilient, premium, and frictionless. Your brand, fully anchored.
+        </p>
+        <div class="hero-cta" style="display: flex; gap: 20px;">
+          <a href="#contact" class="btn btn-primary">Start a project <i data-feather="arrow-right" style="width: 18px;"></i></a>
+          <a href="#portfolio" class="btn btn-outline">See our work</a>
+        </div>
+        <div style="display: flex; gap: 40px; margin-top: 50px;">
+          <div><span style="font-weight: 700; font-size: 1.8rem;">98%</span> <span style="color: var(--text-secondary);">retention</span></div>
+          <div><span style="font-weight: 700; font-size: 1.8rem;">350+</span> <span style="color: var(--text-secondary);">enterprise clients</span></div>
+        </div>
+      </div>
+
+      <div class="hero-grip-symbol">
+        <div class="grip-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600; font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text-primary);">Viking<span style="font-style:italic;">Notifications</span></span>
+            <span style="background: var(--bg-soft); padding: 6px 16px; border-radius: 80px; font-size: 0.9rem; font-weight: 500; color: var(--text-primary);">live</span>
+          </div>
+          <div class="grip-metrics">
+            <div class="metric-item">
+              <span class="metric-number">99.6x</span>
+              <span class="metric-label">conversion</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-number">+98%</span>
+              <span class="metric-label">bounce</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-number">382</span>
+              <span class="metric-label">Clients</span>
+            </div>
+          </div>
+          <div style="background: var(--bg-soft); border-radius: 20px; padding: 18px;">
+            <span style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);"><i data-feather="check-circle" style="width: 18px; color: var(--text-primary);"></i>Happy Vesak to you all !!!</span>
+          </div>
+          <div style="background: var(--bg-soft); border-radius: 20px; padding: 18px;">
+            <span style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);"><i data-feather="check-circle" style="width: 18px; color: var(--text-primary);"></i>We just changed our company name.</span>
+          </div>
+          <div style="background: var(--bg-soft); border-radius: 20px; padding: 18px;">
+            <span style="display: flex; gap: 12px; align-items: center; color: var(--text-primary);"><i data-feather="check-circle" style="width: 18px; color: var(--text-primary);"></i>We are recruiting to join our team.</span>
+          </div>
+          <hr>
+          <hr>
+          <div style="display: flex; gap: 12px; font-size: 0.95rem; color: var(--text-secondary);">
+            <i data-feather="users" style="width: 16px;"></i> 12 partners
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHUKA SECTION (OWNER) -->
+  <div class="container" id="methuka-section">
+    <div style="background: rgba(0, 0, 0, 0); border-radius: 60px; padding: 40px 20px;">
+      <h2 style="text-align: center; color: white; text-shadow: 0 2px 5px rgba(0,0,0,0.3);">Methz.dev</h2>
+      <div style="max-width: 500px; margin: 0 auto;">
+        <div class="team-card" style="background: rgba(36, 20, 18, 0.396); backdrop-filter: blur(6px); color: white; border: 1px solid rgba(255,255,255,0.2);">
+          <div class="team-name" style="color: white;">Methuka Wimalasiri</div>
+          <div class="team-role" style="color: #ddd;">FOUNDER & CREATIVE DIRECTOR</div>
+          <div class="team-divider" style="background: #aaa;"></div>
+          <div class="team-bio" style="color: #f0f0ec;">Architect of Viking Sites' digital philosophy. Methuka leads with a rare fusion of technical foresight and artistic precision, ensuring every project embodies uncompromising quality and elegance. JUST NEVER GIVE UP !!!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM SECTION -->
+  <div class="container" id="team-section">
+    <div class="team-section">
+      <div class="container">
+        <span class="overline">core viking collective</span>
+        <h2 style="text-align: center;">The architects behind the sites</h2>
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-name">Dahamsa Perera</div>
+            <div class="team-role">MANAGER</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">Orchestrates workflow with surgical precision. Dahamsa ensures every project timeline, resource, and collaboration runs with flawless clarity.</div>
+          </div>
+          <div class="team-card">
+            <div class="team-name">Ravija Sesath</div>
+            <div class="team-role">Graphic designer</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">Ravija is super useful for our works. He is a new member, always working with us and the friendliest member of our team.</div>
+          </div> 
+          <div class="team-card">
+            <div class="team-name">Chamod Pahasara</div>
+            <div class="team-role">Python developer</div>
+            <div class="team-divider"></div>
+            <div class="team-bio">Chamod is a skilled programmer, fluent in Python, HTML, CSS, JS, Swift, Dart, Java, C++ and more. He also runs a popular Minecraft server.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUSTED CLIENTS -->
+  <div class="container clients">
+    <span class="overline" style="text-align: center; display: block;">Our Viking Raids</span>
+    <div class="client-row">
+      <span class="client-logo">⏣ Helix Site Studio</span>
+      <span class="client-logo">▣ Sentinel Sites</span>
+      <span class="client-logo">◈ Atlas Ventures Sites</span>
+      <span class="client-logo">◉ Origin Labs Sites</span>
+      <span class="client-logo">$ Vikings Invest</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services" class="services">
+    <div class="container">
+      <span class="overline">premium pillars</span>
+      <h2 style="max-width: 600px; color: var(--text-primary);">Engineering beyond<br>the interface.</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i data-feather="layers"></i>
+          </div>
+          <h3>Viking<br>Core</h3>
+          <p>Headless architectures, micro-frontends, and fault tolerant UX — resilient by design.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i data-feather="activity"></i>
+          </div>
+          <h3>Velocity<br>Sites</h3>
+          <p>Sub second loads, Core Web Vitals mastery. We tune until it's snappy.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">
+            <i data-feather="feather"></i>
+          </div>
+          <h3>Signature<br>Sites</h3>
+          <p>Art direction, motion, and interactive storytelling — your brand, intensified.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO SECTION -->
+  <div id="portfolio" class="portfolio">
+    <div class="container">
+      <span class="overline">our latest work</span>
+      <h2 style="max-width: 600px; color: var(--text-primary);">Portfolio that<br>speaks volumes.</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <img src="web grip ex 1.png" style="width: 600px; height: 400px;">
+          </div>
+          <div class="portfolio-content">
+            <span class="portfolio-tag">E-COMMERCE</span>
+            <span class="portfolio-tag">LUXURY</span>
+            <h3>Maison Sites</h3>
+            <p>Complete digital flagship with 3D product configurator and sub second load times.</p>
+            <a href="web grip ex1.html" class="case-cta" style="border-bottom: none; padding-bottom: 0;">View project <i data-feather="arrow-up-right"></i></a>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <img src="web grip ex 2 (2).png" style="width: 600px; height: 400px;">
+          </div>
+          <div class="portfolio-content">
+            <span class="portfolio-tag">FINTECH</span>
+            <span class="portfolio-tag">SECURE</span>
+            <h3>Veridian</h3>
+            <p>Zero trust banking interface with biometric flow and 12% rise in active sessions.</p>
+            <a href="web grip ex2.html" class="case-cta" style="border-bottom: none; padding-bottom: 0;">View project <i data-feather="arrow-up-right"></i></a>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <img src="web grip ex 3.png" style="width: 600px; height: 400px;">
+          </div>
+          <div class="portfolio-content">
+            <span class="portfolio-tag">TECH</span>
+            <span class="portfolio-tag">B2B</span>
+            <h3>Nexus Core</h3>
+            <p>Enterprise dashboard with real time analytics and sub second filtering.</p>
+            <a href="web grip ex 3.png" class="case-cta" style="border-bottom: none; padding-bottom: 0;">View project <i data-feather="arrow-up-right"></i></a>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-image">
+            <img src="web grip ex 4.png" style="width: 600px; height: 400px;">
+          </div>
+          <div class="portfolio-content">
+            <span class="portfolio-tag">MEDIA</span>
+            <span class="portfolio-tag">STREAMING</span>
+            <h3>Atlas Studios</h3>
+            <p>Immersive storytelling platform with cinematic motion and interactive episodes.</p>
+            <a href="web grip ex4.html" class="case-cta" style="border-bottom: none; padding-bottom: 0;">View project <i data-feather="arrow-up-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CASE STUDIES -->
+  <div id="work" class="container" style="margin-top: 60px; margin-bottom: 40px;">
+    <span class="overline">selected viking works</span>
+    <div class="case-grid">
+      <div class="case-item">
+        <span class="case-tag">E‑COMMERCE / VIKING LUX</span>
+        <div class="case-title">MaisonSites — digital flagship</div>
+        <p style="color: var(--text-secondary); font-size: 1.1rem;">Seamless omnichannel with 3D configurator and sub second transitions.</p>
+        <a href="web grip ex1.html" class="case-cta">View case <i data-feather="arrow-up-right"></i></a>
+      </div>
+      <div class="case-item">
+        <span class="case-tag">FINTECH / VIKING SECURE</span>
+        <div class="case-title">Veridian — viking banking</div>
+        <p style="color: var(--text-secondary); font-size: 1.1rem;">Zero trust interface, biometric flow & 12% rise in active sessions.</p>
+        <a href="web grip ex2.html" class="case-cta">View case <i data-feather="arrow-up-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIAL -->
+  <div class="testimonial">
+    <div class="container testimonial-content">
+      <div class="quote-icon">“</div>
+      <div class="testimonial-text">
+        Viking Sites doesn’t just build websites — they forge digital experiences. Every interaction feels intentional, every transition, confident...
+      </div>
+      <div class="testimonial-author" style="margin-top: 40px; font-weight: 450; color: var(--text-soft);">
+        — Methuka Wimalasiri
+      </div>
+    </div>
+  </div>
+
+  <!-- GET IN TOUCH / CONTACT SECTION -->
+  <div id="contact" class="contact">
+    <div class="container">
+      <div class="contact-container">
+        <div class="contact-info">
+          <span class="overline">get in touch</span>
+          <h2 style="color: var(--text-primary);">Let's build your<br>next project.</h2>
+          <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 32px; max-width: 450px;">
+            Ready to craft something exceptional? Our team is here to help you every step of the way.
+          </p>
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <i data-feather="mail"></i>
+              <span style="color: var(--text-primary);">hello.vikingsites@gmail.com</span>
+            </div>
+            <div class="contact-detail-item">
+              <i data-feather="phone"></i>
+              <span style="color: var(--text-primary);">+94 75 833 9686</span>
+            </div>
+            <div class="contact-detail-item">
+              <i data-feather="map-pin"></i>
+              <span style="color: var(--text-primary);">Colombo , Sri Lanka</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Methuka Wimalasiri">
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="contact-btn">
+              Send message <i data-feather="send" style="width: 18px;"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer" style="margin-top: 120px;">
+    <div class="container footer-grid">
+      <div>
+              <div class="logo">
+        <div class="logo-icon">
+          <!-- Custom Viking Shield Logo SVG -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 2L4 10V22C4 32 24 46 24 46C24 46 44 32 44 22V10L24 2Z" stroke="currentColor" stroke-width="2" fill="var(--text-primary)" />
+            <path d="M24 6V38" stroke="var(--bg-primary)" stroke-width="2" />
+            <path d="M14 14L24 6L34 14" stroke="var(--bg-primary)" stroke-width="2" fill="none"/>
+            <circle cx="24" cy="20" r="3" fill="var(--bg-primary)" />
+          </svg>
+        </div>
+          <span style="font-size: 2rem;">viking sites</span>
+        </div>
+        <p style="max-width: 280px;">Crafting the digital age.<br>Premium, stable, fast.</p>
+        <div style="display: flex; gap: 24px;">
+          <i data-feather="linkedin" style="width: 20px; color: var(--text-secondary);"></i>
+          <i data-feather="twitter" style="width: 20px; color: var(--text-secondary);"></i>
+          <i data-feather="instagram" style="width: 20px; color: var(--text-secondary);"></i>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Company</h4>
+        <a href="#methuka-section">Owner</a>
+        <a href="#">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Get in touch</a>
+      </div>
+      <div class="footer-links">
+        <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Solutions</h4>
+        <a href="#">Viking Core</a>
+        <a href="#">Velocity</a>
+        <a href="#">Signature</a>
+        <a href="#">Enterprise</a>
+      </div>
+      <div>
+        <h4 style="font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Join the fleet</h4>
+        <p style="margin-bottom: 8px; color: var(--text-secondary);">Get monthly insights on digital resilience.</p>
+        <div class="newsletter">
+          <input type="email" placeholder="your@address.com">
+          <button><i data-feather="arrow-right"></i></button>
+        </div>
+        <p style="font-size: 0.8rem; margin-top: 24px; color: var(--text-soft);">© Viking Sites – all rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    feather.replace({ width: '1.2em', height: '1.2em', strokeWidth: 1.5 });
+
+    // ---------- THEME TOGGLE ----------
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    function setTheme(isDark) {
+      if (isDark) {
+        body.classList.add('dark-theme');
+        localStorage.setItem('vikingsites-theme', 'dark');
+      } else {
+        body.classList.remove('dark-theme');
+        localStorage.setItem('vikingsites-theme', 'light');
+      }
+      feather.replace();
+    }
+
+    const savedTheme = localStorage.getItem('vikingsites-theme');
+    if (savedTheme === 'dark') {
+      setTheme(true);
+    } else {
+      setTheme(false);
+    }
+
+    themeToggle.addEventListener('click', function() {
+      const isDark = body.classList.contains('dark-theme');
+      setTheme(!isDark);
+    });
+
+    // ---------- SMOOTH SCROLL ----------
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === "#") return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ---------- INTRO ANIMATION ----------
+    const introDiv = document.getElementById('introOverlay');
+    if (introDiv) {
+      setTimeout(() => {
+        introDiv.classList.add('hide-intro');
+        setTimeout(() => { 
+          if(introDiv) introDiv.style.display = 'none'; 
+        }, 1300);
+      }, 1500);
+    }
+
+    // ---------- VESAK LANTERNS (with varied colors) ----------
+    (function createLanterns() {
+      const lanternContainer = document.getElementById('vesak-lanterns');
+      if (!lanternContainer) return;
+      const numberOfLanterns = 22;
+      const colors = ['', 'red', 'yellow', 'pink'];
+
+      for (let i = 0; i < numberOfLanterns; i++) {
+        const lantern = document.createElement('div');
+        lantern.className = 'lantern';
+        // Random color class
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        if (color) lantern.classList.add(color);
+
+        lantern.style.left = (Math.random() * 100) + '%';
+        const scale = 0.6 + Math.random() * 1.0;
+        lantern.style.transform = `scale(${scale})`;
+        lantern.style.animationDuration = (10 + Math.random() * 18) + 's';
+        lantern.style.animationDelay = (Math.random() * 12) + 's';
+        lanternContainer.appendChild(lantern);
+      }
+    })();
+
+    // ---------- VESAK DIYAS (floating oil lamps) ----------
+    (function createDiyas() {
+      const count = 8;
+      for (let i = 0; i < count; i++) {
+        const diya = document.createElement('div');
+        diya.className = 'diya';
+        diya.style.left = (5 + Math.random() * 90) + '%';
+        diya.style.bottom = (Math.random() * 15) + 'px';
+        diya.style.animationDelay = (Math.random() * 3) + 's';
+        diya.style.animationDuration = (3 + Math.random() * 4) + 's';
+        document.body.appendChild(diya);
+      }
+    })();
+
+    // ---------- LOTUS PETALS ----------
+    (function createPetals() {
+      const count = 10;
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'lotus-petal';
+        petal.style.left = (Math.random() * 1000) + '%';
+        petal.style.animationDuration = (10 + Math.random() * 15) + 's';
+        petal.style.animationDelay = (Math.random() * 10) + 's';
+        petal.style.width = (10 + Math.random() * 14) + 'px';
+        petal.style.height = (14 + Math.random() * 18) + 'px';
+        document.body.appendChild(petal);
+      }
+    })();
+  </script>
+</body>
+</html>
