@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Company Closed</title>
+
+<!-- Minecraft Style Font -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:black;
+    color:white;
+    overflow:hidden;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+/* Intro Text */
+.intro-text{
+    position:absolute;
+    font-family:'Press Start 2P', cursive;
+    font-size:2rem;
+    line-height:1.8;
+    text-transform:uppercase;
+
+    animation:introAnimation 5s forwards;
+
+    text-shadow:
+    4px 4px 0px #444,
+    8px 8px 20px rgba(255,255,255,0.2);
+}
+
+/* Main Content */
+.content{
+    opacity:0;
+    max-width:950px;
+    padding:40px;
+    animation:showContent 2s forwards;
+    animation-delay:4.8s;
+}
+
+.content h1{
+    font-family:'Press Start 2P', cursive;
+    font-size:2rem;
+    margin-bottom:40px;
+    line-height:1.5;
+}
+
+.content p{
+    font-family:Arial, sans-serif;
+    font-size:1.2rem;
+    color:#d4d4d4;
+    line-height:2;
+}
+
+/* Intro Animation */
+@keyframes introAnimation{
+
+    0%{
+        opacity:0;
+        transform:scale(0.3);
+    }
+
+    30%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+    60%{
+        transform:scale(1.6);
+    }
+
+    100%{
+        opacity:0;
+        transform:scale(3);
+    }
+}
+
+/* Paragraph Fade In */
+@keyframes showContent{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+
+    .intro-text{
+        font-size:1rem;
+        padding:20px;
+    }
+
+    .content h1{
+        font-size:1.2rem;
+    }
+
+    .content p{
+        font-size:1rem;
+        line-height:1.8;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- First Animated Text -->
+<div class="intro-text">
+    OUR COMPANY<br>
+    IS CLOSED
+</div>
+
+<!-- Main Content -->
+<div class="content">
+
+    <h1>COMPANY CLOSURE NOTICE</h1>
+
+    <p>
+        After several years of dedicated service and commitment to our customers and community, our company officially ceased operations and has remained shut down for the past <strong>4 years</strong>. During our time in business, we focused on providing quality services, building trust, and maintaining professional standards in everything we did. Although changing circumstances and business challenges led to our closure, the memories, experiences, and achievements created throughout our journey continue to hold great value. Over the years, we were grateful for the support, loyalty, and relationships built with customers, partners, and supporters. While the company is no longer operating, its story remains a meaningful chapter filled with hard work, growth, dedication, and unforgettable moments. We sincerely thank everyone who supported us throughout the years and helped make our journey something truly special.
+    </p>
+
+</div>
+
+</body>
+</html>
